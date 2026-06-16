@@ -51,8 +51,6 @@ jobs:
             # Install production dependencies only (much faster and lighter)
             npm install --production
             
-            # Generate .env file on the server from GitHub Secrets
-            echo "PORT=${{ secrets.PORT }}" > .env
-            
-            # Restart PM2 process and force it to update environment variables from the new .env file
-            pm2 restart tsg-systems --update-env || pm2 start npm --name "tsg-systems" -- start
+            # PM2 doesn't automatically load .env files without an ecosystem.config.js
+            # So we pass the PORT environment variable directly into the PM2 command
+            PORT=${{ secrets.PORT }} pm2 restart tsg-systems --update-env || PORT=${{ secrets.PORT }} pm2 start npm --name "tsg-systems" -- start
