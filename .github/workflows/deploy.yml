@@ -6,33 +6,50 @@ on:
       - main # Change this if your main branch is named differently (e.g., master)
 
 jobs:
-  deploy:
-    name: Deploy to EC2
+  build-and-deploy:
+    name: Build and Deploy to EC2
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the files
         uses: actions/checkout@v4
 
-      - name: Deploy to Server
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # You can change this to 18 if your project uses Node 18
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the Next.js app
+        run: npm run build
+
+      - name: Copy files to EC2 server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          # Target directory on the server
+          target: "~/tsgsystems"
+          # Files to copy (only necessary production files)
+          source: ".next,public,package.json,package-lock.json,next.config.mjs"
+          # Optional: delete all files in target folder before copying, but usually we just overwrite
+          # rm: true
+
+      - name: Start PM2 on Server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Navigate to the project directory
-            # Make sure this directory exists and your project is already cloned here initially
-            cd /path/to/your/project/folder 
+            cd ~/tsgsystems
             
-            # Pull the latest changes from the main branch
-            git pull origin main
-            
-            # Install dependencies
-            npm install
-            
-            # Build the Next.js app
-            npm run build
+            # Install production dependencies only (much faster and lighter)
+            npm install --production
             
             # Generate .env file on the server from GitHub Secrets
             echo "PORT=${{ secrets.PORT }}" > .env
