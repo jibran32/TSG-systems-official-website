@@ -54,5 +54,5 @@ jobs:
             # Generate .env file on the server from GitHub Secrets
             echo "PORT=${{ secrets.PORT }}" > .env
             
-            # Restart PM2 process (Next.js automatically reads PORT from .env)
-            pm2 restart tsg-systems || pm2 start npm --name "tsg-systems" -- start
+            # Restart PM2 process and force it to update environment variables from the new .env file
+            pm2 restart tsg-systems --update-env || pm2 start npm --name "tsg-systems" -- start
