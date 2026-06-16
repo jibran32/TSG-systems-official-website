@@ -1,12 +1,12 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import { testimonials } from "@/content/sections";
 
-/** Client quotes. Remove from app/page.js if you have none yet. */
-export default function Testimonials() {
+/** Client quotes. `heading` is optional for pages with their own PageHeader. */
+export default function Testimonials({ heading = true }) {
   return (
     <section className="sec alt" id="clients">
       <div className="wrap">
-        <SectionHeading eyebrow={testimonials.eyebrow} title={testimonials.title} />
+        {heading && <SectionHeading eyebrow={testimonials.eyebrow} title={testimonials.title} />}
         <div className="quote-wrap">
           {testimonials.quotes.map((q) => (
             <blockquote className={`quote reveal ${q.delay}`} key={q.initials}>

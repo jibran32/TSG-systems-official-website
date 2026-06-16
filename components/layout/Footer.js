@@ -1,5 +1,12 @@
+import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import { site, footerColumns } from "@/content/site";
+
+/** Internal routes use the SPA <Link>; mailto/external/# fall back to <a>. */
+function FooterLink({ href, children }) {
+  if (href.startsWith("/")) return <Link href={href}>{children}</Link>;
+  return <a href={href}>{children}</a>;
+}
 
 /**
  * Site footer: brand blurb, link columns, the large centred watermark, and
@@ -19,9 +26,9 @@ export default function Footer() {
             <div key={col.heading}>
               <h4>{col.heading}</h4>
               {col.links.map((link, i) => (
-                <a href={link.href} key={`${link.label}-${i}`}>
+                <FooterLink href={link.href} key={`${link.label}-${i}`}>
                   {link.label}
-                </a>
+                </FooterLink>
               ))}
             </div>
           ))}

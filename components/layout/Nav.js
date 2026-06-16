@@ -1,11 +1,14 @@
+import Link from "next/link";
 import Logo from "@/components/ui/Logo";
+import NavLink from "@/components/ui/NavLink";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { navLinks } from "@/content/site";
+import { navLinks, primaryCta } from "@/content/site";
 
 /**
- * Sticky header: brand logo (left), navigation pill + primary CTA, theme
+ * Sticky header: brand logo (left), route navigation pill + primary CTA, theme
  * toggle, and the mobile menu button. Open/close behaviour is attached by
- * lib/effects (it targets #menuBtn / #navlinks).
+ * lib/effects (it targets #menuBtn / #navlinks); active-link state is handled
+ * per-link by NavLink.
  */
 export default function Nav() {
   return (
@@ -15,14 +18,14 @@ export default function Nav() {
         <nav className="nav-links" id="navlinks">
           <div className="nav-menu">
             {navLinks.map((link) => (
-              <a href={link.href} key={link.href + link.label}>
+              <NavLink href={link.href} key={link.href}>
                 {link.label}
-              </a>
+              </NavLink>
             ))}
           </div>
-          <a href="#contact" className="btn btn-primary" data-magnetic>
-            Start a project
-          </a>
+          <Link href={primaryCta.href} className="btn btn-primary" data-magnetic>
+            {primaryCta.label}
+          </Link>
         </nav>
         <ThemeToggle />
         <button className="menu-toggle" id="menuBtn" aria-label="Menu" aria-expanded="false">

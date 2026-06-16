@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "PowerShell(npm run dev)",
-      "PowerShell($ok=$false; for\\($i=0;$i -lt 20;$i++\\){ try{ $r=Invoke-WebRequest \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 5; if\\($r.StatusCode -eq 200\\){ \"READY: $\\($r.StatusCode\\)\"; $ok=$true; break } }catch{} Start-Sleep -Milliseconds 1500 }; if\\(-not $ok\\){\"not ready yet\"})"
+      "PowerShell($ok=$false; for\\($i=0;$i -lt 20;$i++\\){ try{ $r=Invoke-WebRequest \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 5; if\\($r.StatusCode -eq 200\\){ \"READY: $\\($r.StatusCode\\)\"; $ok=$true; break } }catch{} Start-Sleep -Milliseconds 1500 }; if\\(-not $ok\\){\"not ready yet\"})",
+      "Bash(npm run *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(npx next *)",
+      "PowerShell(try { Stop-Process -Id 11836 -Force -ErrorAction Stop; \"Stopped stray dev server PID 11836 \\(port 3001\\)\" } catch { \"PID 11836 already gone: $\\($_.Exception.Message\\)\" })"
     ]
   }
 }

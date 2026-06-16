@@ -44,7 +44,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <a href="#services" className="scrollcue" id="cue">
+      <a href="#explore" className="scrollcue" id="cue">
         <span className="mouse" />Scroll
       </a>
     </section>

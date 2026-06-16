@@ -1,12 +1,12 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import { process } from "@/content/sections";
 
-/** Four-step "how we work" timeline. */
-export default function Process() {
+/** Four-step "how we work" timeline. `heading` is optional for dedicated pages. */
+export default function Process({ heading = true }) {
   return (
     <section className="sec" id="process">
       <div className="wrap">
-        <SectionHeading eyebrow={process.eyebrow} title={process.title} />
+        {heading && <SectionHeading eyebrow={process.eyebrow} title={process.title} />}
         <div className="process reveal">
           {process.steps.map((s) => (
             <div className="step" key={s.n}>

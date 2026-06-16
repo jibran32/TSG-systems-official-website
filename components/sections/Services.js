@@ -1,12 +1,16 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import { services } from "@/content/sections";
 
-/** Services grid — three-then-two responsive cards with hover tilt/spotlight. */
-export default function Services() {
+/**
+ * Services grid — three-then-two responsive cards with hover tilt/spotlight.
+ * `heading` can be turned off when the page already supplies a PageHeader, so
+ * the same section works on the home page and on the dedicated /services screen.
+ */
+export default function Services({ heading = true }) {
   return (
     <section className="sec" id="services">
       <div className="wrap">
-        <SectionHeading eyebrow={services.eyebrow} title={services.title} lead={services.lead} />
+        {heading && <SectionHeading eyebrow={services.eyebrow} title={services.title} lead={services.lead} />}
         <div className="cards">
           {services.items.map((s) => (
             <article className={`card tilt reveal ${s.delay}`} key={s.num}>

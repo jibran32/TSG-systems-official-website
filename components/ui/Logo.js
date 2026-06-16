@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { logo, site } from "@/content/site";
 
 /**
@@ -7,7 +8,7 @@ import { logo, site } from "@/content/site";
  */
 export default function Logo() {
   return (
-    <a href="#top" className="logo" aria-label={`${site.name} — home`}>
+    <Link href="/" className="logo" aria-label={`${site.name} — home`}>
       <img
         className="logo-img logo-on-light"
         src={logo.light.src}
@@ -22,6 +23,6 @@ export default function Logo() {
         height={logo.dark.height}
         alt={logo.alt}
       />
-    </a>
+    </Link>
   );
 }

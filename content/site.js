@@ -28,13 +28,20 @@ export const logo = {
   alt: "TSG Systems",
 };
 
-/** Primary navigation links (rendered in the header pill). */
+/**
+ * Primary navigation — now route-based. Each item is its own page/screen
+ * rather than an in-page anchor.
+ */
 export const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#products", label: "Products" },
-  { href: "#process", label: "Process" },
-  { href: "#about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/products", label: "Products" },
+  { href: "/process", label: "Process" },
+  { href: "/about", label: "About" },
+  { href: "/team", label: "Team" },
 ];
+
+/** The primary call-to-action shown in the header and hero. */
+export const primaryCta = { href: "/contact", label: "Start a project" };
 
 /** Scrolling tech marquee items. */
 export const techStack = [
@@ -56,24 +63,26 @@ export const footerColumns = [
   {
     heading: "Services",
     links: [
-      { href: "#services", label: "Software Development" },
-      { href: "#services", label: "Mobile App Development" },
-      { href: "#services", label: "AI Agents" },
-      { href: "#services", label: "Automations" },
-      { href: "#services", label: "Odoo Development" },
+      { href: "/services", label: "Software Development" },
+      { href: "/services", label: "Mobile App Development" },
+      { href: "/services", label: "AI Agents" },
+      { href: "/services", label: "Automations" },
+      { href: "/services", label: "Odoo Development" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { href: "#products", label: "Products" },
-      { href: "#process", label: "Process" },
-      { href: "#about", label: "About" },
+      { href: "/products", label: "Products" },
+      { href: "/process", label: "Process" },
+      { href: "/about", label: "About" },
+      { href: "/team", label: "Team" },
     ],
   },
   {
     heading: "Contact",
     links: [
+      { href: "/contact", label: "Start a project" },
       { href: `mailto:${site.email}`, label: site.email },
       { href: "#", label: site.location },
       { href: "#", label: "LinkedIn" },
