@@ -1,3 +1,9 @@
+/**
+ * Fixed decorative backdrop: parallax glow blobs, grid + dot layers, the
+ * cursor spotlight, film grain, and the scroll progress bar. Purely visual;
+ * the parallax/spotlight motion is driven by lib/effects via the element ids
+ * and `data-depth` / `data-drift` hooks below.
+ */
 export default function Background() {
   return (
     <>
