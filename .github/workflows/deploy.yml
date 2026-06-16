@@ -1,0 +1,41 @@
+name: Deploy Next.js to EC2
+
+on:
+  push:
+    branches:
+      - main # Change this if your main branch is named differently (e.g., master)
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v4
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Navigate to the project directory
+            # Make sure this directory exists and your project is already cloned here initially
+            cd /path/to/your/project/folder 
+            
+            # Pull the latest changes from the main branch
+            git pull origin main
+            
+            # Install dependencies
+            npm install
+            
+            # Build the Next.js app
+            npm run build
+            
+            # Generate .env file on the server from GitHub Secrets
+            echo "PORT=${{ secrets.PORT }}" > .env
+            
+            # Restart PM2 process (Next.js automatically reads PORT from .env)
+            pm2 restart tsg-systems || pm2 start npm --name "tsg-systems" -- start
