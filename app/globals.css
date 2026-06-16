@@ -143,7 +143,14 @@ header.scrolled{border-bottom:1px solid var(--line);background:var(--header-bg-o
 
 /* ============ HERO ============ */
 .hero{position:relative;padding:clamp(76px,13vh,140px) 0 clamp(64px,10vh,104px);overflow:hidden}
-#net{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:.8}
+/* Global constellation backdrop — fixed, full-viewport, behind all content. */
+.net-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#net{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+/* Section-local constellation (e.g. services) — sits behind the section's
+   content but above the global backdrop, so it reads as part of the section. */
+.sec-net{position:relative}
+.sec-net-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.6;pointer-events:none}
+.sec-net>.wrap{position:relative;z-index:1}
 .hero .wrap{position:relative;z-index:2}
 .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center}
 .hero h1{font-size:clamp(44px,6.6vw,84px);margin:22px 0 24px;max-width:14ch}

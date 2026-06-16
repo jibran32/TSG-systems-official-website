@@ -8,7 +8,8 @@ import { services } from "@/content/sections";
  */
 export default function Services({ heading = true }) {
   return (
-    <section className="sec" id="services">
+    <section className="sec sec-net" id="services">
+      <canvas className="sec-net-canvas" data-net aria-hidden="true" />
       <div className="wrap">
         {heading && <SectionHeading eyebrow={services.eyebrow} title={services.title} lead={services.lead} />}
         <div className="cards">

@@ -7,7 +7,6 @@ import { hero } from "@/content/sections";
 export default function Hero() {
   return (
     <section className="hero" id="top">
-      <canvas id="net" />
       <div className="wrap">
         <div className="hero-grid">
           <div>
